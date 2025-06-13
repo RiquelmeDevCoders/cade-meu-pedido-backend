@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: cade-meu-pedido-backend
+    runtime: node
+    buildCommand: npm install
+    startCommand: node src/index.js
+    envVars:
+      - key: OPENAI_API_KEY
+        value: sua-chave-openai-aqui
+      - key: PORT
+        value: 3000
