@@ -12,10 +12,9 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 });
 
-// Mock database (em produção, use um banco de dados real)
 let orders = {};
 
-// Rota para adicionar/atualizar um pedido
+
 app.post('/api/orders', async (req, res) => {
     const { orderId, platform, trackingInfo } = req.body;
 
@@ -31,8 +30,6 @@ app.post('/api/orders', async (req, res) => {
 
     res.status(201).json(orders[orderId]);
 });
-
-// Rota para obter informações de um pedido
 app.get('/api/orders/:orderId', async (req, res) => {
     const { orderId } = req.params;
 
@@ -40,11 +37,10 @@ app.get('/api/orders/:orderId', async (req, res) => {
         return res.status(404).json({ error: 'Order not found' });
     }
 
-    // Aqui você pode integrar com APIs reais de rastreamento
-    // Exemplo para Mercado Livre (simulado):
+    
     if (orders[orderId].platform === 'mercadolivre') {
         try {
-            // Simulação de chamada à API do Mercado Livre
+            
             const status = await simulatePlatformAPI('mercadolivre', orderId);
             orders[orderId].trackingInfo = status;
         } catch (error) {
